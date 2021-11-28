@@ -10,7 +10,7 @@ export default props => {
   const styleField = [styles.field]
   if (opened) styleField.push(styles.opened)
   if(exploded) styleField.push(styles.exploded)
-  if (flagged) styleField.push(styles.flagged,styles.regular)
+  if (flagged) styleField.push(styles.flagged)
   if (!opened && !exploded) styleField.push(styles.regular)
 
   let color = null
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
   },
   regular:{
     backgroundColor: '#999',
-    bordeLeftColor:'pink',
-    bordeTopColor :'pink',
-    bordeRighrColor:'pink',
+     borderLeftColor:'pink',
+    //borderTopColor :'pink',
+    borderRighrColor:'pink',
     borderBottomColor:'pink',
   },
 

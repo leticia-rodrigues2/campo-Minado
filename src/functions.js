@@ -1,3 +1,5 @@
+import Field from "./components/Field"
+
 // Função CRIANDO O TABULEIRO 
 const createBoard = (rows ,columns) => {
   return Array(rows).fill(0).map((_,row) => {
@@ -42,4 +44,72 @@ const createMinedBoard =(rows,columns,minesAmount) => {
   return board
 }
 
-export {createMinedBoard}
+// FUNÇÃO PARA CLONAR O TABULEIRO
+const cloneBoar = board =>{
+  return board.map(rows =>{
+    return rows.map (field =>{
+      return {...field}
+    })
+  })
+}
+
+//FUNÇÃO QUE VAI PEGAR OS VIZINHOS
+const getNeighbors =(board,row,column)=>{
+  const neighbors = []
+  const rows = [row -1 , row , row + 1]
+  const columns = [column -1 , column , column + 1]
+  rows.forEach (r => {
+    columns.forEach(c => {
+      const different = r !== row || c !== column
+      const validRow = r >= 0 && r < board.length
+      const validColum = c >= 0 && c < board[0].length
+      if(different && validRow && validColum){
+        neighbors.push(board[r][c])
+      }
+    
+    })
+  
+  })
+  return neighbors
+}
+
+//FUNÇÃO PARA SEBER SE TEM MINA NOS VIZINHOS ,  E SE ELA É SEGURA OU NÃO 
+const safeNeighborhood = (board , row , column) =>{
+  const safes = (result , neighbor) => result && !neighbor.mined
+  return getNeighbors(board,row,column).reduce(safes , true)
+}
+
+// FUNÇÃO PARA ABRIR O CAMPO
+const onpenField = (board , row, column) => {
+  const field = board[row][column]
+  if (!field.opened){
+    field.opened = true
+    if (field.mined){
+      field.exploded = true
+    }else if (safeNeighborhood (board,row,column)){
+      getNeighbors(board,row,column)
+        .forEach (n=> onpenField(board,n.row, n.column))
+    }else{
+      const neighbors = getNeighbors (board, row , column)
+      field.nearMines = neighbors.filter(n => n.mined).length
+    }
+  }
+}
+
+// VER OS CAMPOS EXPLODIDO
+const fields = board => [].concat(...board)
+const hadExplosion = board => fields(board)
+.filter (field => field.exploded).length > 0
+const pendding = field => (field.mined && !field.flagged)
+ || (!field.mined && !field.opened)
+ const wonGame = board => fields(board).filter(pendding).length === 0
+const showMines = board => fields(board).filter(field => field.mined)
+.forEach(field => field.opened = true)
+
+export {createMinedBoard,
+        cloneBoar,
+        onpenField,
+        hadExplosion,
+        wonGame,
+        showMines
+      }

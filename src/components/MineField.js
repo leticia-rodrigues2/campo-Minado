@@ -10,7 +10,7 @@ export default props =>{
       return <Field {...field} key={c}/>
     })
     return <View key={r}
-            style = {{flexDirection : 'row'}}>
+            style = {{flexDirection :'row'}}>
               {columns}
           </View>
 })
