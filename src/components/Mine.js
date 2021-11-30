@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
   line :{
     position:'absolute',
-    height: 3,
+    height:3,
     width:20,
     borderRadius:3,
     backgroundColor:'black',
