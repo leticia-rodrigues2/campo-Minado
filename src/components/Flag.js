@@ -3,6 +3,7 @@ import { View,StyleSheet } from "react-native";
 
 export default props => {
   return(
+    
     <View style = {styles.container}>
       <View style ={[styles.flagpole, props.bigger ? styles.flagpoleBigger : null]}/>
       <View style ={[styles.flag, props.bigger ? styles.flagBigger : null]}/>

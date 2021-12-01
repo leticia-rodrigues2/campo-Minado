@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   opened:{
     backgroundColor:'#999',
     borderColor : '#777',
-    alignItems: 'center',
+   // alignItems: 'center',
     justifyContent: 'center',
   },
 
