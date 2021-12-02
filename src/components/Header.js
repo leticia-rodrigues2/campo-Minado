@@ -47,6 +47,7 @@ const styles = StyleSheet.create ({
     fontWeight:'bold',
     paddingTop:5,
     marginLeft:20,
+    marginRight:20,
   },
 
   button :{
@@ -56,9 +57,12 @@ const styles = StyleSheet.create ({
   },
 
   buttonLabel:{
+    padding: 8,
     fontSize:20,
     color: 'black',
     fontWeight:'bold',
+    marginLeft:10,
+    marginRight:10,
   }
 
 
